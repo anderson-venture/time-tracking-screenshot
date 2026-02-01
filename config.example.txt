@@ -1,0 +1,17 @@
+# Configuration Example
+# Copy this file and update with your values
+
+Firebase Configuration:
+  Bucket Name: your-project-id.appspot.com
+  Credentials Path: path/to/firebase-credentials.json
+  Encryption Key: (generate using cryptography.fernet.generate_key())
+
+Application Settings:
+  Screenshot Interval: 30 seconds
+  Screenshot Quality: 65 (1-100)
+  Sync Interval: 600 seconds (10 minutes)
+  Max Local Days: 7 days
+
+Storage:
+  Local Path: %APPDATA%\Microsoft\Windows\SystemData\
+  (Can be customized in src/config.py)
