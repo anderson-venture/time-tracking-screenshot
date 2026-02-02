@@ -14,6 +14,12 @@ class Config:
     # Sync settings
     SYNC_INTERVAL = 600  # seconds (10 minutes)
     
+    # Network sync settings (central server)
+    # IMPORTANT: Change these to match your server
+    SERVER_ADDRESS = '192.168.1.100'  # IP address of central server
+    SERVER_PORT = 5000  # Port of central server
+    API_TOKEN = 'CHANGE-THIS-TO-A-STRONG-RANDOM-TOKEN'  # Shared secret for authentication
+    
     # Local storage settings
     # Hidden folder in AppData
     APPDATA = os.getenv('APPDATA')
@@ -23,10 +29,6 @@ class Config:
     
     # Database
     DB_PATH = os.path.join(LOCAL_STORAGE_PATH, 'data.db')
-    
-    # Firebase settings
-    FIREBASE_CREDENTIALS_PATH = os.path.join(LOCAL_STORAGE_PATH, 'creds.enc')
-    FIREBASE_BUCKET_NAME = None  # Set this during setup
     
     # Log retention
     MAX_LOCAL_DAYS = 7  # Keep local data for 7 days before cleanup

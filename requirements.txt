@@ -1,7 +1,11 @@
+# Client dependencies
 pynput==1.7.6
 Pillow==10.2.0
-firebase-admin==6.4.0
-schedule==1.2.1
+requests==2.31.0
 pywin32==306
 PyInstaller==6.3.0
-cryptography==42.0.2
+
+# Server dependencies
+Flask==3.0.0
+Werkzeug==3.0.1
+schedule==1.2.1
